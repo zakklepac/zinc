@@ -7,27 +7,6 @@
 * Talk about components
 * 
 
-## Components in vanilla js
-
-Set up the list of users
-
-```
-<ul class="user-list" id="z-user-list">  
-  <li class="user">
-    <img src="https://f4.bcbits.com/img/0001142378_10.jpg" alt="Photo of Jack Burton" class="user-photo">
-    <div class="user-name">Jack Burton</div>
-    <div class="user-location">San Francisco, CA</div>
-  </li>
-</ul>  
-```
-
-Get some random user data
-
-```
-fetch('https://randomuser.me/api/?results=5')
-    .then(res => res.json())
-    .then(json => console.log(json));
-```
 
 On data get, create new HTML element, populate with data, and append to #g-user-list.
 
