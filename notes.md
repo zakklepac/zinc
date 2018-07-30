@@ -8,6 +8,9 @@
 * Implement simple element creation and appending with data
 * Implement simple element creation with templates
 
+* Create simple component with template and data
+* 
+
 ## One-way binding
 
 ```
