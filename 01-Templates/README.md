@@ -1,4 +1,4 @@
-# Making Components
+# Creating HTML Elements with Templates
 
 We're going to step through the process of implementing some simple templates or components for our framework. Components are small, reusable chunks of markup and functionality that you can define and use in your web application. Let's begin by working on a user component for a list of users.
 
