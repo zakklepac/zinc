@@ -23,4 +23,17 @@ Change your `populateList` function to use another function, `renderTemplate`. `
     </li>
 ```
 
-Append the filled-in template html returned from the `renderTemplate` function to the `z-user-list` element to make the magic happen!
+and you'll be filling it in with data that looks like this: 
+
+```js
+    const data = {
+        photo: user.picture.thumbnail,
+        firstName: user.name.first,
+        lastName: user.name.last,
+        city: user.location.city,
+        state: user.location.state,
+        email: user.location.email
+    };
+```
+
+Append the filled-in template html returned from the `renderTemplate` function to the `z-user-list` element to make the magic happen! (You'll want to look at [String.replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) with [regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) and [insertAdjacentHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML))
