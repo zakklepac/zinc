@@ -5,31 +5,8 @@
 
 * Talk about common elements of frameworks
 * Talk about components
-* 
-
-
-On data get, create new HTML element, populate with data, and append to #g-user-list.
-
-```
-function addUsers(users) {
-    const userList = document.getElementById('z-user-list');
-    users.forEach(user => {
-        const fullName = `${user.name.first} ${user.name.last}`;
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <img src="${user.picture.thumbnail}" alt="Photo of ${fullName}">
-            <div class="user-name">${fullName}</div>
-            <div class="user-location">${user.location.city}, ${user.location.state}</div>`;
-        userList.appendChild(li);
-    });
-}
-
-fetch(...)
-    .then(json => addUsers(json.results));
-
-```
-
-But you've probably already done that, or something similar.
+* Implement simple element creation and adding with data
+* Implement simple element creation with templates
 
 ## Rendering templates
 

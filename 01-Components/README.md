@@ -8,3 +8,19 @@ We'll start off by doing things the way we're used to doing them in vanilla java
 
 Using the provided index.html and zinc.js files, implement the `populateList` function so that it takes the provided user data and adds them to the list with id `z-user-list`. (If you need a refresher, check out [Document.createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) and [Node.appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) on MDN.)
 
+## 2) Creating elements with templates
+
+So, that's all fine, but once things get more complicated than a single element with some data in it, they're going to get... complicated. That's a lot of nested createElement and appendChild and whatnot. So... since we're wanting to write some html and stick some data in it, let's just do that. Let's write a string with our HTML in it and use template literals to fill in the data!
+
+Change your `populateList` function to use another function, `renderTemplate`. `renderTemplate` should take two arguments: a template string to fill in, and an object with the image, first name, last name, location, and email in it. The template string should looks something like this:
+
+```html
+    <li class="user">
+        <img class="user-photo" src="{{ photo }}" alt="Photo of {{ firstName }} {{ lastName }}">
+        <div class="user-name">{{ firstName }} {{ lastName }}</div>
+        <div class="user-location">{{ city }}, {{ state }}</div>
+        <div class="user-email">{{ email }}</div>
+    </li>
+```
+
+Append the filled-in template html returned from the `renderTemplate` function to the `z-user-list` element to make the magic happen!
