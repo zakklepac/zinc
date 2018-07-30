@@ -5,7 +5,7 @@
 
 * Talk about common elements of frameworks
 * Talk about components
-* Implement simple element creation and adding with data
+* Implement simple element creation and appending with data
 * Implement simple element creation with templates
 
 ## One-way binding
