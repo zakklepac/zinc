@@ -32,8 +32,19 @@ and you'll be filling it in with data that looks like this:
         lastName: user.name.last,
         city: user.location.city,
         state: user.location.state,
-        email: user.location.email
+        email: user.email
     };
 ```
 
 Append the filled-in template html returned from the `renderTemplate` function to the `z-user-list` element to make the magic happen! (You'll want to look at [String.replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) with [regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) and [insertAdjacentHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML))
+
+For bonus points, implement your `renderTemplate` function to just accept the raw `user` object that you get back in your fetched list of user data. This means that you'll have to figure out a way not just to replace the {{ variable }} with a single object's key value, but to drill down into some data.nested.object.value and replace {{ nested.object.value }} with the right thing. In that case, your template will look like:
+
+```html
+<li class="user">
+    <img class="user-photo" src="{{ picture.thumbnail }}" alt="Photo of {{ name.first }} {{ name.last }}">
+    <div class="user-name">{{ name.first }} {{ name.last }}</div>
+    <div class="user-location">{{ location.city }}, {{ location.state }}</div>
+    <div class="user-email">{{ email }}</div>
+</li>
+```

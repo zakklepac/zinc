@@ -8,47 +8,6 @@
 * Implement simple element creation and adding with data
 * Implement simple element creation with templates
 
-## Rendering templates
-
-```
-const myEmployee = {  
-  id: 'asdfsafdasdfasdfa',
-  name: {
-    first: 'Bob',
-    last: 'Builder'
-  },
-  role: 'Lead Engineer',
-  photos: {
-    primary: {
-      url: 'foobar.com/img.jpg',
-      description: 'A photo of Bob the Builder'
-    }
-  }
-}
-```
-
-```
-<li data-id="{{id}}">  
-  <img src="{{photos.primary.url}}" alt="{{photos.primary.description}}">
-  <p>
-    <strong>{{name.first}} {{name.last}}</strong>
-    <small>{{role}}</small>
-  </p>
-</li>
-```
-
-```
-function render (template, data) {  
-  return template.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, variable) => {
-    return variable.split('.').reduce((acc, curr) => {
-      return acc[curr];
-    }, data) || '';
-  });
-}
-```
-
-(Test with Jasmine: https://codepen.io/jacopotarantino/pen/NbZqym)
-
 ## One-way binding
 
 ```
