@@ -1,6 +1,7 @@
 'use strict';
 
 /* eslint-env browser */
+/* globals Zinc */
 
 (() => {
     const userData = {
@@ -18,5 +19,6 @@
         email: 'jack.burton@example.com'
     };
 
-
+    Zinc.registerComponent('user-item', 'user', userData);
 })();
+
