@@ -17,6 +17,4 @@
         },
         email: 'jack.burton@example.com'
     };
-
-
 })();
