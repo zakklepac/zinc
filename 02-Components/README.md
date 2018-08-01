@@ -23,4 +23,4 @@ Our components will be tags that we define ourselves, and attach a template and 
     };
 ```
 
-then insert it into our `user.html` template, and insert it into the `user-item` tag on our page. (You'll want to use [Document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) or something similar to grab the component element.)
+then render it into our `user.html` template, and insert the whole thing into the `user-item` tag on our page. (You'll want to use [Document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) or something similar to grab the component element.)
