@@ -8,14 +8,6 @@ const Zinc = {
 };
 
 (() => {
-    Zinc.registerComponent = (componentName, templateFile, data) => {
-        Zinc.components[componentName] = {
-            componentName,
-            templateFile,
-            data
-        };
-    };
-
     function renderTemplate(template, data) {
         return fetch(`${template}.html`)
             .then(res => res.text())
@@ -30,6 +22,15 @@ const Zinc = {
                 .then(html => nodeList[i].insertAdjacentHTML('beforeend', html));
         }
     }
+
+    Zinc.registerComponent = (componentName, templateFile, data) => {
+        Zinc.components[componentName] = {
+            componentName,
+            templateFile,
+            data
+        };
+        renderComponent(componentName, templateFile, data);
+    };
 
     function renderComponents() {
         Object.values(Zinc.components).forEach((component) => {

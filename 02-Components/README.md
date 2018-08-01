@@ -41,9 +41,19 @@ After our `registerComponent` function is declared, we can then put a function (
 
 After we complete this step, you should be able to test it out by putting multiple `<user-item>` elements on the page—which will all render out our friend Jack's entry the same way. If you'd like to register some different components that display different data, just do that by giving another `elementName`, use the same template file, and give it the new data object you want it to use. Play around with it!
 
+Bonus: See if you can go back to fetching five random users from the API, and register five different user components to display them.
+
 # adding functionality with controller
 
-# config object
 
-# - then data binding
-# - then custom attributes
+
+
+- config object
+
+
+
+
+ - then data binding
+
+
+ - then custom attributes
