@@ -55,6 +55,7 @@ Let's create a controller function that toggles a highlight off and on our list 
     }
 ```
 
+Now, this is going to get tricky, so let's step through this. You're going to want to attach your controller directly to the element (the `<li>`) when you add it to the DOM. Let's say that whenever and however we create that element (*cough*DOMParser*cough*insertAdjacentElement*cough*), we'll just add our controller to it as the element.$controller. That way, you can access the element through `this` in your controller, and make it do whatever you want on a click event.
 
 
 - config object

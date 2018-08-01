@@ -8,8 +8,7 @@
         this.addEventListener('click', () => {
             this.classList.toggle('hilight');
             this.$state.hilit = !this.$state.hilit;
-            
-        });      
+        });
     }
 
     function populateList(users) {
