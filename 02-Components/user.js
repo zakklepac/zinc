@@ -1,6 +1,7 @@
 'use strict';
 
 /* eslint-env browser */
+/* globals Zinc */
 
 (() => {
     const userData = {
