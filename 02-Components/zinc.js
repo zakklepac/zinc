@@ -5,7 +5,7 @@
 const Zinc = {};
 
 (() => {
-    function renderComponent(element, content) {
+    function renderComponent(element, content, userData) {
         console.log(element, content); // eslint-disable-line no-console
     }
 
