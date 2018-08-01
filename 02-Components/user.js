@@ -14,8 +14,14 @@
     function populateList(users) {
         const myComponents = ['user-one', 'user-two', 'user-three', 'user-four', 'user-five'];
         for (let i = 0; i < users.length; i++) {
-            Zinc.registerComponent(myComponents[i], 'user', users[i], userController);
+            Zinc.registerComponent({
+                name: myComponents[i],
+                templateFile: 'user',
+                data: users[i],
+                controller: userController
+            });
         }
+        Zinc.renderComponents();
     }
 
     fetch('https://randomuser.me/api/?results=5')

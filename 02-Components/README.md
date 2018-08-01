@@ -65,7 +65,7 @@ Here's a relatively easy win for you. As of now, we're potentially passing four 
     Zinc.registerComponent = function(configObj);
 
     Zinc.registerComponent({
-        element: 'user-item',
+        name: 'user-item',
         templateFile: 'user',
         data: userDataObject,
         controller: userController,

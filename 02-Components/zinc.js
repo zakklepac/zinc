@@ -10,6 +10,10 @@ const Zinc = {
 (() => {
     const domParser = new DOMParser();
 
+    function init() {
+        Zinc.renderComponents();
+    }
+
     function renderTemplate(template, data) {
         return fetch(`${template}.html`)
             .then(res => res.text())
@@ -17,7 +21,7 @@ const Zinc = {
                 variable.split('.').reduce((acc, curr) => acc[curr], data) || ''));
     }
 
-    function renderComponent(componentName) {
+    Zinc.renderComponent = (componentName) => {
         const component = Zinc.components[componentName];
         const nodeList = document.querySelectorAll(componentName);
         for (let i = 0; i < nodeList.length; i++) {
@@ -33,27 +37,27 @@ const Zinc = {
                     Zinc.components[componentName].element = el;
                 });
         }
-    }
+    };
 
-    function renderComponents() {
+    Zinc.renderComponents = () => {
         Object.values(Zinc.components).forEach((component) => {
-            renderComponent(component.componentName);
+            Zinc.renderComponent(component.name);
         });
-    }
+    };
 
-    Zinc.registerComponent = (componentName, templateFile, data, controller) => {
-        Zinc.components[componentName] = {
-            componentName,
+    Zinc.registerComponent = ({
+        name,
+        templateFile,
+        data,
+        controller
+    }) => {
+        Zinc.components[name] = {
+            name,
             templateFile,
             data,
             controller
         };
-        renderComponent(componentName);
     };
-
-    function init() {
-        renderComponents();
-    }
 
     document.addEventListener('DOMContentLoaded', init);
 })();
