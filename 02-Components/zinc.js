@@ -8,6 +8,8 @@ const Zinc = {
 };
 
 (() => {
+    const domParser = new DOMParser();
+
     function renderTemplate(template, data) {
         return fetch(`${template}.html`)
             .then(res => res.text())
@@ -15,28 +17,39 @@ const Zinc = {
                 variable.split('.').reduce((acc, curr) => acc[curr], data) || ''));
     }
 
-    function renderComponent(element, templateFile, content) {
-        const nodeList = document.querySelectorAll(element);
+    function renderComponent(componentName) {
+        const component = Zinc.components[componentName];
+        const nodeList = document.querySelectorAll(componentName);
         for (let i = 0; i < nodeList.length; i++) {
-            renderTemplate(templateFile, content)
-                .then(html => nodeList[i].insertAdjacentHTML('beforeend', html));
+            renderTemplate(component.templateFile, component.data)
+                .then((html) => {
+                    const doc = domParser.parseFromString(html, 'text/html');
+                    const el = nodeList[i].insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
+                    el.$state = {};
+                    if (component.controller) {
+                        el.$controller = component.controller;
+                        el.$controller();
+                    }
+                    Zinc.components[componentName].element = el;
+                });
         }
     }
 
-    Zinc.registerComponent = (componentName, templateFile, data) => {
+    function renderComponents() {
+        Object.values(Zinc.components).forEach((component) => {
+            renderComponent(component.componentName);
+        });
+    }
+
+    Zinc.registerComponent = (componentName, templateFile, data, controller) => {
         Zinc.components[componentName] = {
             componentName,
             templateFile,
-            data
+            data,
+            controller
         };
-        renderComponent(componentName, templateFile, data);
+        renderComponent(componentName);
     };
-
-    function renderComponents() {
-        Object.values(Zinc.components).forEach((component) => {
-            renderComponent(component.componentName, component.templateFile, component.data);
-        });
-    }
 
     function init() {
         renderComponents();

@@ -45,6 +45,15 @@ Bonus: See if you can go back to fetching five random users from the API, and re
 
 # adding functionality with controller
 
+Displaying data in our components is nice, but we'd also like to define some custom functionality for the user item. We'll do that by passing in yet another argument to `registerComponent`, this time a callback function to set up the *controller* for our component. 
+
+Let's create a controller function that toggles a highlight off and on our list item when we click it. All we're going to do is add a click event handler to the `<li>` element in the template that adds or removes a class (.hilight) to the item.
+
+```js
+    Zinc.registerComponent = function(elementName, templateFile, dataObject, controller) {
+        ...
+    }
+```
 
 
 
