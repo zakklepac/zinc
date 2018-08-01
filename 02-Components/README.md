@@ -43,7 +43,7 @@ After we complete this step, you should be able to test it out by putting multip
 
 Bonus: See if you can go back to fetching five random users from the API, and register five different user components to display them.
 
-# adding functionality with controller
+## 3) Adding Functionality with a Controller
 
 Displaying data in our components is nice, but we'd also like to define some custom functionality for the user item. We'll do that by passing in yet another argument to `registerComponent`, this time a callback function to set up the *controller* for our component. 
 
@@ -57,13 +57,20 @@ Let's create a controller function that toggles a highlight off and on our list 
 
 Now, this is going to get tricky, so let's step through this. You're going to want to attach your controller directly to the element (the `<li>`) when you add it to the DOM. Let's say that whenever and however we create that element (*cough*DOMParser*cough*insertAdjacentElement*cough*), we'll just add our controller to it as the element.$controller. That way, you can access the element through `this` in your controller, and make it do whatever you want on a click event.
 
+## 4) Simplifying registerComponent with a config object
 
-- config object
+Here's a relatively easy win for you. As of now, we're potentially passing four arguments to `Zinc.registerComponent`, and that's a bad code smell—it's just too many arguments to keep track of what they are and what order they should be in. SO! Instead of passing in a bunch of arguments (and I bet there will be more in the future), let's just pass in one configuration object to the function.
 
+```js
+    Zinc.registerComponent = function(configObj);
 
+    Zinc.registerComponent({
+        element: 'user-item',
+        templateFile: 'user',
+        data: userDataObject,
+        controller: userController,
+        // ... and so on
+    });
+```
 
-
- - then data binding
-
-
- - then custom attributes
+Everything else should work the same—you're just simplifying the way you call the registration function, and setting it up to be more easily extended in the future.
