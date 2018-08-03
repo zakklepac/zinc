@@ -34,6 +34,6 @@ Unfortunately, that only allows us to use one chunk of data for each component w
 Where can we store that data once we render the component? Maybe in the controller? Sounds reasonable. So, our task here is twofold: 
 
 1. Change your renderComponent function to look for `z[var]` attributes on the element it's rendering, and use those to grab the data for the element.
-2. Add the data for your user in an object for your controller somewhere (something like `controller.$state` or `controller.$scope` will work just fine) and use that when you render.
+2. Add the data for your user in an object for your controller somewhere (something like `controller.$data` or `controller.$state` or `controller.$scope` will work just fine) and use that when you render.
 
 We'll also have to change our template back to just using `userName` and `userEmail` and whatnot for the momment, until we build a more robust way to handle the data coming in...

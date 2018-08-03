@@ -14,30 +14,37 @@ const Zinc = {
         Zinc.renderComponents();
     }
 
-    // TBD: prefetch and cache templates?
+    // TBD: prefetch or cache templates?
     function renderTemplate(template, data) {
         return fetch(`${template}.html`)
             .then(res => res.text())
             .then(html => html.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, variable) =>
-                variable.split('.').reduce((acc, curr) => acc[curr], data) || ''));
+                variable.split('.').reduce((acc, curr) => acc[curr.toLowerCase()], data) || ''));
     }
 
     Zinc.renderComponent = (componentName, parentNode = document) => {
         const component = Zinc.components[componentName];
         const nodeList = parentNode.querySelectorAll(componentName);
-        for (let i = 0; i < nodeList.length; i++) {
-            renderTemplate(component.templateFile, component.data)
+
+        nodeList.forEach((node) => {
+            const data = {};
+            for (let i = 0; i < node.attributes.length; i++) {
+                const key = node.attributes[i].name.match(/z\[([^]+)]/)[1];
+                data[key] = node.attributes[i].value;
+            }
+
+            renderTemplate(component.templateFile, data)
                 .then((html) => {
                     const doc = domParser.parseFromString(html, 'text/html');
-                    const el = nodeList[i].insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
-                    el.$state = {};
+                    const el = node.insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
+                    el.$data = {};
                     if (component.controller) {
                         el.$controller = component.controller;
                         el.$controller();
                     }
                     Zinc.renderComponents(el);
                 });
-        }
+        });
     };
 
     Zinc.renderComponents = (rootNode = document) => {
@@ -49,13 +56,11 @@ const Zinc = {
     Zinc.registerComponent = ({
         name,
         templateFile,
-        data,
         controller
     }) => {
         Zinc.components[name] = {
             name,
             templateFile,
-            data,
             controller
         };
     };
