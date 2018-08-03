@@ -29,8 +29,10 @@ const Zinc = {
         nodeList.forEach((node) => {
             const data = {};
             for (let i = 0; i < node.attributes.length; i++) {
-                const key = node.attributes[i].name.match(/z\[([^]+)]/)[1];
-                data[key] = node.attributes[i].value;
+                const keyMatches = node.attributes[i].name.match(/z\[([^]+)]/);
+                if (keyMatches && keyMatches.length === 2) { // eslint-disable-line no-magic-numbers
+                    data[keyMatches[1]] = node.attributes[i].value;
+                }
             }
 
             renderTemplate(component.templateFile, data)
