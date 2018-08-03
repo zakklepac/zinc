@@ -10,13 +10,9 @@ const Zinc = {
 (() => {
     const domParser = new DOMParser();
 
-    function init() {
-        Zinc.renderComponents();
-    }
-
     // TBD: prefetch or cache templates?
-    function renderTemplate(template, data) {
-        return fetch(`${template}.html`)
+    function renderTemplateFile(templateFile, data) {
+        return fetch(`${templateFile}.html`)
             .then(res => res.text())
             .then(html => html.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, variable) =>
                 variable.split('.').reduce((acc, curr) => acc[curr.toLowerCase()], data) || ''));
@@ -35,7 +31,7 @@ const Zinc = {
                 }
             }
 
-            renderTemplate(component.templateFile, data)
+            renderTemplateFile(component.templateFile, data)
                 .then((html) => {
                     const doc = domParser.parseFromString(html, 'text/html');
                     const el = node.insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
@@ -55,17 +51,9 @@ const Zinc = {
         });
     };
 
-    Zinc.registerComponent = ({
-        name,
-        templateFile,
-        controller
-    }) => {
-        Zinc.components[name] = {
-            name,
-            templateFile,
-            controller
-        };
+    Zinc.registerComponent = (config) => {
+        Zinc.components[config.name] = config;
     };
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => Zinc.renderComponents());
 })();
