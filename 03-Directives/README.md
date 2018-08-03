@@ -40,7 +40,7 @@ We'll also have to change our template back to just using `userName` and `userEm
 
 ## 2) Showing and hiding elements based on data
 
-Let's see if we can use this data for something interesting. (This may seem a little simple redundant at first, but hang on, it get *nuts* later on.) Let's add a `z[canadian]="false"` to all the user info components except for the one for Wade Wilson. Now we know where everyone's from, and we only want to show folks that aren't from Canada, so let's write ourselves another custom attribute—or "directive"—to take care of that.
+Let's see if we can use this data for something interesting. (This may seem a little simple redundant at first, but hang on, it get *nuts* later on.) Let's add a `z[canadian]="false"` to all the user info components except for the one for Wade Wilson; set him to `z[canadian]="true"`. Now we know where everyone's from, and we only want to show folks that aren't from Canada, so let's write ourselves another custom attribute—or "directive"—to take care of that.
 
 We want to hide any component that contains a Canadian, so we'll write an attribute directive called `z-hide` to do that for us, like this:
 
@@ -50,4 +50,10 @@ We want to hide any component that contains a Canadian, so we'll write an attrib
                z-hide="canadian">
 ```
 
-Now we just have to modify our 
+Now we just have to modify our component rendering function to look for a `z-hide` attribute, check to see if it's set to "true" or "false" (note that these are strings!), then modify the element to hide or show it accordingly.
+
+Once you've done that, try adding a `z-show` directive to only show someone if they're Canadian, and try that out with a different component element. 
+
+## 3) Iterating over a list of data
+
+Now that we've got the hang of adding directive attributes and modifying the component element accordingly, let's try to make a `z-repeat` directive to loop over an array. Unfortunately, the way we've set it up isn't super condusive to throwing array data into our components—we'll take care of that in the next section!
