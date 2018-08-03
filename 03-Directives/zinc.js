@@ -39,7 +39,7 @@ const Zinc = {
                 .then((html) => {
                     const doc = domParser.parseFromString(html, 'text/html');
                     const el = node.insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
-                    el.$data = {};
+                    el.$data = data;
                     if (component.controller) {
                         el.$controller = component.controller;
                         el.$controller();
