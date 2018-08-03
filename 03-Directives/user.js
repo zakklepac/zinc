@@ -22,8 +22,4 @@
     });
 
     Zinc.renderComponents();
-
-    // fetch('https://randomuser.me/api/?results=5')
-    //     .then(res => res.json())
-    //     .then(json => populateList(json.results));
 })();

@@ -24,14 +24,16 @@ and then using that bare component by iteself in our html or template:
 Unfortunately, that only allows us to use one chunk of data for each component we register, which is less than useful. So! Let's start by taking the data property of our `registerComponent` function, then adding pieces of data as attributes to our element, and start the rendering from there. We'll start simple, so let's just add the users's name, location, email, and a `src` for the thumbnail in the `user-item` element. To set them apart from regular attributes, let's wrap them in a cozy `z[propertyName]="property value"]` set of square brackets.
 
 ```html
-    <user-item z[userName]="Jack Burton"] 
+    <user-info z[userName]="Jack Burton"] 
                z[userEmail]="jack@gmail.com"
                z[userLocation]="San Francisco, CA"
                z[thumbSrc]="https://f4.bcbits.com/img/0001142378_10.jpg">
-    </user-item>
+    </user-info>
 ```
 
 Where can we store that data once we render the component? Maybe in the controller? Sounds reasonable. So, our task here is twofold: 
 
 1. Change your renderComponent function to look for `z[var]` attributes on the element it's rendering, and use those to grab the data for the element.
 2. Add the data for your user in an object for your controller somewhere (something like `controller.$state` or `controller.$scope` will work just fine) and use that when you render.
+
+We'll also have to change our template back to just using `userName` and `userEmail` and whatnot for the momment, until we build a more robust way to handle the data coming in...
