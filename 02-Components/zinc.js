@@ -14,6 +14,7 @@ const Zinc = {
         Zinc.renderComponents();
     }
 
+    // TBD: prefetch and cache templates?
     function renderTemplate(template, data) {
         return fetch(`${template}.html`)
             .then(res => res.text())
@@ -21,9 +22,9 @@ const Zinc = {
                 variable.split('.').reduce((acc, curr) => acc[curr], data) || ''));
     }
 
-    Zinc.renderComponent = (componentName) => {
+    Zinc.renderComponent = (componentName, parentNode = document) => {
         const component = Zinc.components[componentName];
-        const nodeList = document.querySelectorAll(componentName);
+        const nodeList = parentNode.querySelectorAll(componentName);
         for (let i = 0; i < nodeList.length; i++) {
             renderTemplate(component.templateFile, component.data)
                 .then((html) => {
@@ -34,14 +35,14 @@ const Zinc = {
                         el.$controller = component.controller;
                         el.$controller();
                     }
-                    Zinc.components[componentName].element = el;
+                    Zinc.renderComponents(el);
                 });
         }
     };
 
-    Zinc.renderComponents = () => {
+    Zinc.renderComponents = (rootNode = document) => {
         Object.values(Zinc.components).forEach((component) => {
-            Zinc.renderComponent(component.name);
+            Zinc.renderComponent(component.name, rootNode);
         });
     };
 

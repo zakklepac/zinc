@@ -16,11 +16,15 @@
         for (let i = 0; i < users.length; i++) {
             Zinc.registerComponent({
                 name: myComponents[i],
-                templateFile: 'user',
-                data: users[i],
-                controller: userController
+                templateFile: 'user-item',
+                data: users[i]
             });
         }
+        Zinc.registerComponent({
+            name: 'user-list',
+            templateFile: 'user-list',
+            controller: userController
+        });
         Zinc.renderComponents();
     }
 
