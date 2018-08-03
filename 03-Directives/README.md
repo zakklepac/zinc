@@ -37,3 +37,17 @@ Where can we store that data once we render the component? Maybe in the controll
 2. Add the data for your user in an object for your controller somewhere (something like `controller.$data` or `controller.$state` or `controller.$scope` will work just fine) and use that when you render.
 
 We'll also have to change our template back to just using `userName` and `userEmail` and whatnot for the momment, until we build a more robust way to handle the data coming in...
+
+## 2) Showing and hiding elements based on data
+
+Let's see if we can use this data for something interesting. (This may seem a little simple redundant at first, but hang on, it get *nuts* later on.) Let's add a `z[canadian]="false"` to all the user info components except for the one for Wade Wilson. Now we know where everyone's from, and we only want to show folks that aren't from Canada, so let's write ourselves another custom attribute—or "directive"—to take care of that.
+
+We want to hide any component that contains a Canadian, so we'll write an attribute directive called `z-hide` to do that for us, like this:
+
+```html
+    <user-info z[userName]="Geddy Lee"
+               z[canadian]="true"
+               z-hide="canadian">
+```
+
+Now we just have to modify our 

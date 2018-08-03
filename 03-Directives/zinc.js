@@ -1,7 +1,7 @@
 'use strict';
 
 /* eslint-env browser */
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-magic-numbers */
 
 const Zinc = {
     components: {}
@@ -9,6 +9,15 @@ const Zinc = {
 
 (() => {
     const domParser = new DOMParser();
+
+    const zDirectives = {
+        hide: (el, arg) => {
+            el.style.display = (el.$state[arg] === 'true' ? 'none' : '');
+        },
+        show: (el, arg) => {
+            el.style.display = (el.$state[arg] === 'true' ? '' : 'none');
+        },
+    };
 
     // TBD: prefetch or cache templates?
     function renderTemplateFile(templateFile, data) {
@@ -24,10 +33,19 @@ const Zinc = {
 
         nodeList.forEach((node) => {
             const data = {};
+            const directiveData = {};
+
             for (let i = 0; i < node.attributes.length; i++) {
+                /* Process data attributes */
                 const keyMatches = node.attributes[i].name.match(/z\[([^]+)]/);
-                if (keyMatches && keyMatches.length === 2) { // eslint-disable-line no-magic-numbers
+                if (keyMatches && keyMatches.length === 2) {
                     data[keyMatches[1]] = node.attributes[i].value;
+                }
+
+                /* Process z-directives and store argument */
+                const dirMatches = node.attributes[i].name.match(/z-(\w+)/);
+                if (dirMatches && dirMatches.length === 2 && zDirectives[dirMatches[1]]) {
+                    directiveData[dirMatches[1]] = node.attributes[i].value;
                 }
             }
 
@@ -35,11 +53,17 @@ const Zinc = {
                 .then((html) => {
                     const doc = domParser.parseFromString(html, 'text/html');
                     const el = node.insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
-                    el.$data = {};
+                    el.$state = data;
                     if (component.controller) {
                         el.$controller = component.controller;
                         el.$controller();
                     }
+
+                    /* Execute z-directives */
+                    Object.keys(directiveData).forEach((key) => {
+                        zDirectives[key](el, directiveData[key]);
+                    });
+
                     Zinc.renderComponents(el);
                 });
         });
