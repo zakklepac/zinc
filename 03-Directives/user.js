@@ -11,24 +11,19 @@
         });
     }
 
-    function populateList(users) {
-        const myComponents = ['user-one', 'user-two', 'user-three', 'user-four', 'user-five'];
-        for (let i = 0; i < users.length; i++) {
-            Zinc.registerComponent({
-                name: myComponents[i],
-                templateFile: 'user-item',
-                data: users[i]
-            });
-        }
-        Zinc.registerComponent({
-            name: 'user-list',
-            templateFile: 'user-list',
-            controller: userController
-        });
-        Zinc.renderComponents();
-    }
+    Zinc.registerComponent({
+        name: 'user-list',
+        templateFile: 'user-list',
+        controller: userController
+    });
+    Zinc.registerComponent({
+        name: 'user-info',
+        templateFile: 'user-item'
+    });
 
-    fetch('https://randomuser.me/api/?results=5')
-        .then(res => res.json())
-        .then(json => populateList(json.results));
+    Zinc.renderComponents();
+
+    // fetch('https://randomuser.me/api/?results=5')
+    //     .then(res => res.json())
+    //     .then(json => populateList(json.results));
 })();
