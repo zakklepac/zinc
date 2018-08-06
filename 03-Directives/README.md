@@ -21,7 +21,7 @@ and then using that bare component by iteself in our html or template:
     <user-item></user-item>
 ```
 
-Unfortunately, that only allows us to use one chunk of data for each component we register, which is less than useful. So! Let's start by taking the data property of our `registerComponent` function, then adding pieces of data as attributes to our element, and start the rendering from there. We'll start simple, so let's just add the users's name, location, email, and a `src` for the thumbnail in the `user-item` element. To set them apart from regular attributes, let's wrap them in a cozy `z[propertyName]="property value"]` set of square brackets.
+Unfortunately, that only allows us to use one chunk of data for each component we register, which is less than useful. So! Let's start by taking the data property of our `registerComponent` function, then adding pieces of data as attributes to our element, and start the rendering from there. We'll start simple, so let's just add the users's name, location, email, and a `src` for the thumbnail in the `user-item` element. To set them apart from regular attributes, let's wrap them in a cozy `z[propertyName]="property value"` set of square brackets.
 
 ```html
     <user-info z[userName]="Jack Burton"] 

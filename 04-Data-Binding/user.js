@@ -5,28 +5,28 @@
 
 (() => {
     const userData = {
-        1: {
+        user1: {
             name: 'Jack Burton',
             email: 'jack@gmail.com',
             location: 'San Francisco, CA',
             photo: 'https://f4.bcbits.com/img/0001142378_10.jpg',
             canadian: false
         },
-        2: {
+        user2: {
             name: 'Heddy Lamarr',
             email: 'hlamarr@gmail.com',
             location: 'Casselberry, FL',
             photo: 'https://media.newyorker.com/photos/5a1f13f2f2287d71effeaea4/master/w_727,c_limit/Camhi-Hedy-Lamarr-doc.jpg',
             canadian: false
         },
-        3: {
+        user3: {
             name: 'Wade Wilson',
             email: 'dp@gmail.com',
             location: 'Vancouver, BC',
             photo: 'http://cdn.movieweb.com/img.news.tops/NEgG0Vl8amGlji_1_b.jpg',
             canadian: true
         },
-        4: {
+        user4: {
             name: 'Marion Ravenwood',
             email: 'marion@gmail.com',
             location: 'Kathmandu, Nepal',
