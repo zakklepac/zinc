@@ -13,12 +13,12 @@
 
     Zinc.registerComponent({
         name: 'user-list',
-        templateFile: 'user-list',
-        controller: userController
+        templateFile: 'user-list'
     });
     Zinc.registerComponent({
         name: 'user-info',
-        templateFile: 'user-item'
+        templateFile: 'user-item',
+        controller: userController
     });
 
     Zinc.renderComponents();
