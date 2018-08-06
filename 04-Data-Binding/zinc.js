@@ -32,7 +32,7 @@ const Zinc = {
         const nodeList = parentNode.querySelectorAll(componentName);
 
         nodeList.forEach((node) => {
-            const data = {};
+            const data = component.model || parentNode.$state || {};
             const directiveData = {};
 
             for (let i = 0; i < node.attributes.length; i++) {

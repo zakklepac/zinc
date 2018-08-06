@@ -33,7 +33,6 @@
             photo: 'https://imgix.bustle.com/rehost/2016/9/14/300fb745-57cc-47f5-9c66-0d5acd902d91.jpg',
             canadian: false
         },
-
     };
 
     function userController() {
