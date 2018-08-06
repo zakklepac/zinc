@@ -50,28 +50,3 @@ Now, let's add a model property to the component when we register it:
 ```
 
 And now just hook it up and make it go! Easy as that. Suuuuuper easy. (It's not easy. But you'll get it.)
-
-## 2) Binding the data object to the controller as a model
-
-If you're like me, you probably came up with something gross like this in your `user-list` template: 
-
-```html
-<ul class="user-list" id="z-user-list">
-    <user-info z[name]="{{user1.name}}" z[email]="{{user1.email}}" z[location]="{{user1.location}}" z[photo]="{{user1.photo}}"></user-info>
-    <user-info z[name]="{{user2.name}}" z[email]="{{user2.email}}" z[location]="{{user2.location}}" z[photo]="{{user2.photo}}"></user-info>
-    <user-info z[name]="{{user3.name}}" z[email]="{{user3.email}}" z[location]="{{user3.location}}" z[photo]="{{user3.photo}}"></user-info>
-    <user-info z[name]="{{user4.name}}" z[email]="{{user4.email}}" z[location]="{{user4.location}}" z[photo]="{{user4.photo}}"></user-info>
-</ul>
-```
-
-EW. It would be much better to just bind the object that we want, and let the `user-item` template figure it out:
-
-```html
-<ul class="user-list" id="z-user-list">
-    <user-info z-model="user1"></user-info>
-    <user-info z-model="user2"></user-info>
-    <user-info z-model="user3"></user-info>
-    <user-info z-model="user4"></user-info>
-</ul>
-```
-
