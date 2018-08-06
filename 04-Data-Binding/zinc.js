@@ -17,6 +17,7 @@ const Zinc = {
         show: (el, arg) => {
             el.style.display = (el.$state[arg] === 'true' ? '' : 'none');
         },
+        model: () => {}
     };
 
     // TBD: prefetch or cache templates?
@@ -32,7 +33,8 @@ const Zinc = {
         const nodeList = parentNode.querySelectorAll(componentName);
 
         nodeList.forEach((node) => {
-            const data = component.model || Object.assign({}, parentNode.$state) || {};
+            // const data = component.model || Object.assign({}, parentNode.$state) || {};
+            const data = component.model || {};
             const directiveData = {};
 
             for (let i = 0; i < node.attributes.length; i++) {
@@ -48,6 +50,9 @@ const Zinc = {
                     directiveData[dirMatches[1]] = node.attributes[i].value;
                 }
             }
+            if (directiveData.model) {
+                Object.assign(data, parentNode.$state[directiveData.model]);
+            }
 
             renderTemplateFile(component.templateFile, data)
                 .then((html) => {
@@ -59,7 +64,7 @@ const Zinc = {
                         el.$controller();
                     }
 
-                    /* Execute z-directives */
+                    /* Execute z-directives (not z-model) */
                     Object.keys(directiveData).forEach((key) => {
                         zDirectives[key](el, directiveData[key]);
                     });

@@ -74,3 +74,4 @@ EW. It would be much better to just bind the object that we want, and let the `u
     <user-info z-model="user4"></user-info>
 </ul>
 ```
+
