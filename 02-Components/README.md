@@ -40,10 +40,3 @@ Here's what we want to do: use Zinc to register our component, telling it what t
 After our `registerComponent` function is declared, we can then put a function (called, say, `renderComponents`) into our `init` function that runs when the page loads (which is after all the javascript is loaded), and use that to automatically render the `<user-item>` element into our page. 
 
 After we complete this step, you should be able to test it out by putting multiple `<user-item>` elements on the page—which will all render out our friend Jack's entry the same way. If you'd like to register some different components that display different data, just do that by giving another `elementName`, use the same template file, and give it the new data object you want it to use. Play around with it!
-
-# adding functionality with controller
-
-# config object
-
-# - then data binding
-# - then custom attributes
