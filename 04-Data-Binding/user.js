@@ -36,6 +36,7 @@
     };
 
     function userController() {
+        Zinc.renderComponent('user-info', this, this.$state[this.$state.id]);
         this.addEventListener('click', () => {
             this.classList.toggle('hilight');
             this.$state.hilit = !this.$state.hilit;
@@ -45,12 +46,12 @@
     Zinc.registerComponent({
         name: 'user-list',
         templateFile: 'user-list',
-        controller: userController,
         model: userData
     });
     Zinc.registerComponent({
         name: 'user-info',
-        templateFile: 'user-item'
+        templateFile: 'user-item',
+        controller: userController
     });
 
     Zinc.renderComponents();
