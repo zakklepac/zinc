@@ -34,8 +34,6 @@ const Zinc = {
         nodeList.forEach((node) => {
             const data = component.model || Object.assign({}, parentNode.$state) || {};
             const directiveData = {};
-            console.log(data);
-            
 
             for (let i = 0; i < node.attributes.length; i++) {
                 /* Process data attributes */

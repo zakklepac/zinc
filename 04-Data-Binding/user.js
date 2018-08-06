@@ -36,7 +36,6 @@
     };
 
     function userController() {
-        Zinc.renderComponent('user-info', this, this.$state[this.$state.id]);
         this.addEventListener('click', () => {
             this.classList.toggle('hilight');
             this.$state.hilit = !this.$state.hilit;
@@ -53,6 +52,4 @@
         templateFile: 'user-item',
         controller: userController
     });
-
-    Zinc.renderComponents();
 })();
