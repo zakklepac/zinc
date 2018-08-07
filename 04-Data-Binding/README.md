@@ -75,3 +75,8 @@ EW. It would be much better to just bind the object that we want, and let the `u
 </ul>
 ```
 
+## 3) One-way data binding
+
+Now, just make the page update when you change the data in the model object. Easy, right? 
+
+(More on this soon, but check out javascript Proxy objects for now.)

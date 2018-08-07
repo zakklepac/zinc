@@ -52,4 +52,10 @@
         templateFile: 'user-item',
         controller: userController
     });
+
+    document.getElementById('updateButton').onclick = (event) => {
+        event.preventDefault();
+        userData.user1 = 'Barry Allen';
+        // Zinc.renderComponents();
+    };
 })();
