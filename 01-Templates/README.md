@@ -6,7 +6,7 @@ We're going to step through the process of implementing some simple templates or
 
 We'll start off by doing things the way we're used to doing them in vanilla javascript: grab a bunch of data from somewhere, create some HTML elements, plop the data into the elements, and stick them in an existing element.
 
-Using the provided index.html and zinc.js files, implement the `populateList` function so that it takes the provided user data and adds them to the list with id `z-user-list`. (If you need a refresher, check out [Document.createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) and [Node.appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) on MDN.)
+Using the provided index.html and zinc.js files, implement the `populateList` function so that it takes the provided user data and add them to the list with id `z-user-list`. (If you need a refresher, check out [Document.createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) and [Node.appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) on MDN.)
 
 ## 2) Creating elements with templates
 
