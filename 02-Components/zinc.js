@@ -10,49 +10,52 @@ const Zinc = {
 (() => {
     const domParser = new DOMParser();
 
-    function renderTemplate(template, data) {
-        return fetch(`${template}.html`)
-            .then(res => res.text())
-            .then(html => html.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, variable) =>
-                variable.split('.').reduce((acc, curr) => acc[curr], data) || ''));
-    }
-
-    function renderComponent(componentName) {
-        const component = Zinc.components[componentName];
-        const nodeList = document.querySelectorAll(componentName);
-        for (let i = 0; i < nodeList.length; i++) {
-            renderTemplate(component.templateFile, component.data)
-                .then((html) => {
-                    const doc = domParser.parseFromString(html, 'text/html');
-                    const el = nodeList[i].insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
-                    el.$state = {};
-                    if (component.controller) {
-                        el.$controller = component.controller;
-                        el.$controller();
-                    }
-                    Zinc.components[componentName].element = el;
-                });
-        }
-    }
-
-    function renderComponents() {
-        Object.values(Zinc.components).forEach((component) => {
-            renderComponent(component.componentName);
-        });
-    }
-
-    Zinc.registerComponent = (componentName, templateFile, data, controller) => {
-        Zinc.components[componentName] = {
-            componentName,
+    Zinc.registerComponent = ({
+        name,
+        templateFile,
+        data,
+        controller
+    }) => {
+        Zinc.components[name] = {
+            name,
             templateFile,
             data,
             controller
         };
-        renderComponent(componentName);
+    };
+
+    function renderTemplate(template, data) {
+        return fetch(`${template}.html`)
+            .then(res => res.text())
+            .then(html => html.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (thing, variable) =>
+                variable.split('.').reduce((acc, currVal) => acc[currVal], data)));
+    }
+
+    Zinc.renderComponent = (componentName, parentNode = document) => {
+        const component = Zinc.components[componentName];
+        const ele = parentNode.querySelectorAll(componentName);
+        ele.forEach((ele) => { renderTemplate(component.templateFile, component.data)
+            .then((html) => {
+                const doc = domParser.parseFromString(html, 'text/html');
+                const el = ele.insertAdjacentElement('beforeend', doc.firstChild.children[1].firstChild);
+                el.$state = {};
+                if (component.controller) {
+                    el.$controller = component.controller;
+                    el.$controller();
+                }
+                Zinc.renderComponents(el);
+            });
+        });
+    }
+
+    Zinc.renderComponents = (rootNode = document) => {
+        Object.values(Zinc.components).forEach((component) => {
+            Zinc.renderComponent(component.name, rootNode);
+        });
     };
 
     function init() {
-        renderComponents();
+        Zinc.renderComponents();
     }
 
     document.addEventListener('DOMContentLoaded', init);
